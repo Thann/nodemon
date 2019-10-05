@@ -1,10 +1,10 @@
 {
-  "name": "chode",
+  "name": "nodemon",
   "version": "0.0.1",
-  "description": "Auto-restart node apps using Chokidar!",
+  "description": "Auto-restart node apps!",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Thann/chode"
+    "url": "https://github.com/Thann/nodemon"
   },
   "bin": "index.js",
   "main": "index.js",
