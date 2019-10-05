@@ -1,8 +1,7 @@
 #!/bin/env node
 
 const http = require('http');
-const Chode = require('./index.js');
-if (Chode()) return;
+if (require('./index.js')()) return;
 
 console.log("STARTING APP:", process.argv);
 const server = http.createServer((req, res) => {
