@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 
 const path = require('path');
-const cluster = require('cluster');
 const chokidar = require('chokidar');
+const { fork } = require('child_process');
 
 module.exports = function(arg) {
-  if (cluster.isMaster) {
+  if (!process.send) {
     let child;
     const start = function() {
       if (child)
         child.kill();
-      child = cluster.fork();
+      child = fork(process.argv[1]);
     };
     if (!arg) {
       arg = path.dirname(process.argv[1]);
     }
     chokidar.watch(arg).on('ready', start).on('change', start);
   }
-  return cluster.isMaster;
+  return !process.send;
 }
