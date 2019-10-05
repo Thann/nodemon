@@ -8,4 +8,5 @@ Auto-restart node apps using chokidar!
 
 And your app will restart on any changes to the folder it's in!
 
-You can also pass options through to chokidar
+This is just a wrapper for `chokidar.watch(...)`,
+so you can pass any of [those options](https://github.com/paulmillr/chokidar#api).
