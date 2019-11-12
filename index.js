@@ -26,9 +26,9 @@ module.exports = function(paths, opts) {
         child = fork(process.argv[1], process.argv.slice(2));
       }
     }
-    chokidar.watch(paths, opts).on('ready', start).on('change', start);
+    return chokidar.watch(paths, opts).on('ready', start).on('change', start);
   }
-  return !process.send;
+  return false;
 }
 
 if (require.main === module) {  // CLI
