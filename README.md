@@ -16,3 +16,17 @@ so you can pass any of [those options](https://github.com/paulmillr/chokidar#api
 You can also run arbitrary commands in the terminal like this:
 
 `$ nodemon echo cool`
+
+### Advanced
+```javascript
+const watcher = require('nodemon')(
+  __dirname, // folder to watch
+  {          // chokidar options
+    ignored: /.*\/node_modules\/.*/
+  }
+);
+if (watcher) {
+  watcher.on('change', f => console.log('----- changed:', f));
+  return;
+}
+```

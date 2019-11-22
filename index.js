@@ -10,7 +10,7 @@ module.exports = function(paths, opts) {
     let child, start;
     if (require.main === module) {  // CLI
       let bin = process.argv[2];
-      if (fs.existsSync(bin))
+      if (bin[0] !== '/' && fs.existsSync(bin))
         bin = path.join(paths, bin);
       start = function() {
         if (child) child.kill();
