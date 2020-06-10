@@ -1,6 +1,6 @@
 {
   "name": "nodemon",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Auto-restart node apps!",
   "repository": {
     "type": "git",
@@ -13,6 +13,6 @@
   },
   "license": "Unlicense",
   "dependencies": {
-    "chokidar": "^3.2.1"
+    "chokidar": "^3.4.0"
   }
 }
