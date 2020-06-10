@@ -5,7 +5,7 @@ const path = require('path');
 const chokidar = require('chokidar');
 const { fork, spawn } = require('child_process');
 
-module.exports = function(paths, opts) {
+module.exports = function(paths, chokidarOpts, opts) {
   if (!process.send) {
     let child, start;
     if (require.main === module) {  // CLI
@@ -21,14 +21,20 @@ module.exports = function(paths, opts) {
     } else {  // require()
       if (!paths)
         paths = path.dirname(process.argv[1]);
-      start = function() {
-        if (child) child.kill();
+      start = async function() {
+        if (child) await kill(child, opts && opts.killSignal);
         child = fork(process.argv[1], process.argv.slice(2));
       }
     }
-    return chokidar.watch(paths, opts).on('ready', start).on('change', start);
+    return chokidar.watch(paths, chokidarOpts).on('ready', start).on('change', start);
   }
   return false;
+}
+
+function kill(child, signal) {
+    const p = new Promise(accept => child.on('exit', accept));
+    child.kill(signal);
+    return p;
 }
 
 if (require.main === module) {  // CLI

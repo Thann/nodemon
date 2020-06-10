@@ -22,6 +22,9 @@ const watcher = require('chode')(
   __dirname, // folder to watch
   {          // chokidar options
     ignored: /.*\/node_modules\/.*/
+  },
+  {          // library options
+    killSignal: 'SIGTERM'
   }
 );
 if (watcher) {
@@ -29,3 +32,4 @@ if (watcher) {
   return;
 }
 ```
+See [test.js](./test.js) for an example app.
