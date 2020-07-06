@@ -12,8 +12,8 @@ module.exports = function(paths, chokidarOpts, opts) {
       let bin = process.argv[2];
       if (bin[0] !== '/' && fs.existsSync(bin))
         bin = path.join(paths, bin);
-      start = function() {
-        if (child) child.kill();
+      start = async function() {
+        if (child) await kill(child, opts && opts.killSignal);
         child = spawn(bin, process.argv.slice(3), {
           stdio: 'inherit',
         });
@@ -32,6 +32,8 @@ module.exports = function(paths, chokidarOpts, opts) {
 }
 
 function kill(child, signal) {
+    // Immediatly return if already exited
+    if (child.exitCode !== null) return;
     const p = new Promise(accept => child.on('exit', accept));
     child.kill(signal);
     return p;
