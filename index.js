@@ -32,7 +32,7 @@ module.exports = function(paths, chokidarOpts, opts) {
 }
 
 function kill(child, signal) {
-    // Immediatly return if already exited
+    // Immediately return if already exited
     if (child.exitCode !== null) return;
     const p = new Promise(accept => child.on('exit', accept));
     child.kill(signal);
